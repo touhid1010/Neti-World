@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!--floating label of editText-->
+    <color name="textColorHint">#fc6666cf</color>
+    <color name="floatHighlight">#fc9999d4</color>
+    <color name="colorControlNormal">#6067ce</color>
+    <color name="colorControlActivated">#1f1d8b</color>
+    <color name="textColor">#001156</color>
+
+    <!--floating label of editText-->
+    <color name="buttonAccent">#4e4eb9</color>
+    <color name="buttonNormal">#41419c</color>
+    <color name="buttonAccentWhite">#bfccff</color>
+    <color name="buttonNormalWhite">#a3a3a3</color>
+    <color name="buttonNormalGray">#545466</color>
+
+    <color name="black_overlay">#66000000</color>
+
+</resources>
