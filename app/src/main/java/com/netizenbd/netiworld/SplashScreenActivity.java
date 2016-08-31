@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.netizenbd.netiworld.loginsignup.LoginActivity;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     ImageView imageView_splashLogo,

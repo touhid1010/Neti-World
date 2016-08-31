@@ -1,4 +1,4 @@
-package com.netizenbd.netiworld;
+package com.netizenbd.netiworld.loginsignup;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.netizenbd.netiworld.R;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -20,8 +22,6 @@ public class ForgotPassword extends AppCompatActivity {
             editText_recovery_code,
             editText_newPass,
             editText_newPass_again;
-
-
 
 
     @Override

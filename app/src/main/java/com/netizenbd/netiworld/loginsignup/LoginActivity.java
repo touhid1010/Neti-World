@@ -1,4 +1,4 @@
-package com.netizenbd.netiworld;
+package com.netizenbd.netiworld.loginsignup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.netizenbd.netiworld.MySingleton;
+import com.netizenbd.netiworld.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +42,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     ImageView imageView_splashLogo,
             imageView_splashText;
+
+
+    // server side
+    StringRequest stringRequest;
+
+    // shared pref to create login
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imageView_splashText.startAnimation(animationText);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     } // end of onCreate
 
 
@@ -82,15 +90,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button_logIn:
 
                 final String emailMobile = editText_userId.getText().toString();
-                if (!isValidEmail(emailMobile)) {
-                    if (!isValidMobile(emailMobile)) {
-                        textInputLayout_userId.setError("Invalid Email or Mobile");
-                    } else {
-                        textInputLayout_userId.setError(null);
-                    }
-                } else {
-                    textInputLayout_userId.setError(null);
-                }
+//                if (!isValidEmail(emailMobile)) {
+//                    if (!isValidMobile(emailMobile)) {
+//                        textInputLayout_userId.setError("Invalid Email or Mobile");
+//                    } else {
+//                        textInputLayout_userId.setError(null);
+//                    }
+//                } else {
+//                    textInputLayout_userId.setError(null);
+//                }
 
                 final String pass = editText_password.getText().toString();
                 if (!isValidPassword(pass)) {
@@ -99,10 +107,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     textInputLayout_password.setError(null);
                 }
 
-
                 if (textInputLayout_userId.getError() == null) {
                     if (textInputLayout_password.getError() == null) {
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                        // server side
+
+                        String SERVER_URL = "http://192.168.0.110:8080/neti-api/oauth/token?username=" + editText_userId.getText().toString() + "&password=" + editText_password.getText().toString() + "&client_id=neti-api&client_secret=abcd1234&grant_type=password";
+
+                        stringRequest = new StringRequest(Request.Method.POST, SERVER_URL, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+
+                                    JSONObject jSONObject = new JSONObject(response);
+                                    String accessToken = jSONObject.getString("access_token");
+                                    Toast.makeText(LoginActivity.this, ":" + accessToken, Toast.LENGTH_LONG).show();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                /**
+                                 * Set login token to shared preference
+                                 */
+
+
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(LoginActivity.this, "Login Error", Toast.LENGTH_SHORT).show();
+                                error.printStackTrace();
+                            }
+                        }) {
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+
+                                Map<String, String> params = new HashMap<>();
+                                params.put("username", editText_userId.getText().toString());
+                                params.put("password", editText_password.getText().toString());
+
+                                return params;
+
+                            }
+                        };
+                        MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }
                 }
 

@@ -1,4 +1,4 @@
-package com.netizenbd.netiworld;
+package com.netizenbd.netiworld.loginsignup;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.netizenbd.netiworld.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -85,7 +87,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
             case R.id.action_save:
 
                 if (editText_user_first_name.getText().toString().isEmpty()) {
-                    textInputLayout_firstName.setError("Name must be ginen");
+                    textInputLayout_firstName.setError("Name must be given");
                 } else {
                     textInputLayout_firstName.setError(null);
                 }

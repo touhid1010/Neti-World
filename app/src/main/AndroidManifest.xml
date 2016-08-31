@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".loginsignup.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,7 +26,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Signup"
+            android:name=".loginsignup.Signup"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ForgotPassword"
+            android:name=".loginsignup.ForgotPassword"
             android:label="@string/title_activity_forgot_password"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
